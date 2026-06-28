@@ -3,136 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Cup Live - South Africa vs Canada</title>
+    <title>Live Stream | South Africa vs Canada</title>
+    <!-- Importing a professional Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Modern, premium dark theme */
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --live-red: #ef4444;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle at center, #111e16 0%, #0a0f0c 100%);
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        nav {
+            background-color: #0b1120;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            min-height: 100vh;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Sleek Header Section */
-        header {
-            width: 100%;
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Main Page Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 25px;
+            flex: 1;
+        }
+
+        /* Left Side: Stream & Scoreboard */
+        .main-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Scoreboard Header */
+        .scoreboard {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .team-flag {
+            width: 40px;
+            height: 40px;
+            background-color: #334155;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .match-info {
             text-align: center;
-            padding: 30px 0 10px 0;
         }
 
-        .logo {
+        .score {
             font-size: 2rem;
             font-weight: 800;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #00ff87, #60efff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
+            letter-spacing: 2px;
+            margin: 5px 0;
         }
 
-        /* Pulse Live Indicator */
-        .status-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .live-badge {
-            background-color: #ff4b4b;
-            color: white;
+        .match-status {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--live-red);
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 4px;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(255, 75, 75, 0.4);
-        }
-
-        .stream-title {
-            color: #a0aec0;
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        /* Glassmorphism Container for the Stream */
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
+            display: inline-flex;
             align-items: center;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
+            gap: 6px;
         }
 
-        .stream-card {
+        .match-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--live-red);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--live-red);
+        }
+
+        /* Player Container */
+        .player-wrapper {
             width: 100%;
-            max-width: 960px;
             aspect-ratio: 16 / 9;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background-color: #000;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .stream-card:hover {
-            border-color: rgba(0, 255, 135, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 255, 135, 0.1);
+        /* Server Buttons */
+        .servers {
+            display: flex;
+            gap: 10px;
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Footer info */
-        footer {
+        .server-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+        }
+
+        .server-btn:hover {
+            color: var(--text-main);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .server-btn.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        /* Right Side: Stats Panel */
+        .sidebar {
+            background: var(--bg-card);
+            border-radius: 12px;
             padding: 20px;
-            color: #4a5568;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sidebar h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-main);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            font-size: 0.9rem;
+        }
+
+        .stat-val {
+            font-weight: 800;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
             font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        footer {
             text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .scoreboard {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .servers {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Content -->
-    <header>
-        <h1 class="logo">Fifa World Cup</h1>
-        <div class="status-container">
-            <span class="live-badge">Live</span>
-            <p class="stream-title">South Africa vs Canada</p>
+    <!-- Professional Top Navigation -->
+    <nav>
+        <a href="#" class="nav-brand">WorldCup<span>Live</span></a>
+        <div class="nav-links">
+            <a href="#" class="active">Live Match</a>
+            <a href="#">Highlights</a>
+            <a href="#">Schedule</a>
+            <a href="#">Standings</a>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Player Card -->
-    <main class="main-content">
-        <div class="stream-card">
-            <!-- Sandbox removed so the player allows the stream to load -->
-            <iframe 
-                title="Willow Cricket Player" 
-                marginheight="0" 
-                marginwidth="0" 
-                src="https://embed.st/embed/admin/admin-willow-cricket/1" 
-                scrolling="no" 
-                allowfullscreen="yes" 
-                allow="encrypted-media; picture-in-picture;" 
-                width="100%" 
-                height="100%" 
-                frameborder="0">
-            </iframe>
+    <div class="container">
+        
+        <!-- Left Column: Video & Servers -->
+        <div class="main-col">
+            
+            <!-- Match Scoreboard -->
+            <div class="scoreboard">
+                <div class="team">
+                    <div class="team-flag">🇿🇦</div>
+                    South Africa
+                </div>
+                <div class="match-info">
+                    <div class="match-status">Live - 67'</div>
+                    <div class="score">1 - 1</div>
+                </div>
+                <div class="team">
+                    Canada
+                    <div class="team-flag">🇨🇦</div>
+                </div>
+            </div>
+
+            <!-- Video Player -->
+            <div class="player-wrapper">
+                <iframe 
+                    id="video-player"
+                    title="World Cup Live Stream" 
+                    src="https://embed.st/embed/admin/admin-willow-cricket/1" 
+                    scrolling="no" 
+                    allowfullscreen="yes" 
+                    allow="encrypted-media; picture-in-picture;" 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0">
+                </iframe>
+            </div>
+
+            <!-- Sleek Server Switcher -->
+            <div class="servers">
+                <button class="server-btn active" onclick="switchServer('https://embed.st/embed/admin/admin-willow-cricket/1', this)">Server 1 (FHD)</button>
+                <button class="server-btn" onclick="switchServer('https://embed.st/embed/admin/admin-willow-cricket/1', this)">Server 2 (HD)</button>
+                <button class="server-btn" onclick="switchServer('https://embed.st/embed/admin/admin-willow-cricket/1', this)">Server 3 (Backup)</button>
+                <button class="server-btn" onclick="switchServer('https://embed.st/embed/admin/admin-willow-cricket/1', this)">Server 4 (Backup)</button>
+            </div>
+
         </div>
-    </main>
 
-    <!-- Minimal Clean Footer -->
+        <!-- Right Column: Live Match Stats Panel -->
+        <div class="sidebar">
+            <h3>Match Statistics</h3>
+            
+            <div class="stat-row">
+                <span class="stat-val">48%</span>
+                <span class="stat-label">Possession</span>
+                <span class="stat-val">52%</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-val">12</span>
+                <span class="stat-label">Shots</span>
+                <span class="stat-val">9</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-val">4</span>
+                <span class="stat-label">Shots on Target</span>
+                <span class="stat-val">3</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-val">6</span>
+                <span class="stat-label">Corners</span>
+                <span class="stat-val">4</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-val" style="color: #fbbf24;">2</span>
+                <span class="stat-label">Yellow Cards</span>
+                <span class="stat-val" style="color: #fbbf24;">1</span>
+            </div>
+        </div>
+
+    </div>
+
     <footer>
-        &copy; 2026 Fifa World Cup Live. All rights reserved.
+        &copy; 2026 WorldCup Live Broadcasting. All rights reserved. <br>
+        <span style="font-size: 0.7rem; opacity: 0.5;">This site is for educational purposes. We do not host any media files on this server.</span>
     </footer>
+
+    <!-- Interactive Button Logic Script -->
+    <script>
+        function switchServer(streamUrl, buttonElement) {
+            document.getElementById('video-player').src = streamUrl;
+            const buttons = document.querySelectorAll('.server-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
