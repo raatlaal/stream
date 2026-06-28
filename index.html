@@ -3,32 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Willow Cricket Live</title>
+    <title>CricPulse Live - Willow Cricket Streaming</title>
     <style>
+        /* Modern, premium dark theme */
         body {
             margin: 0;
-            background-color: #000;
+            padding: 0;
+            background: radial-gradient(circle at center, #111e16 0%, #0a0f0c 100%);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Sleek Header Section */
+        header {
+            width: 100%;
+            text-align: center;
+            padding: 30px 0 10px 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        /* Pulse Live Indicator */
+        .status-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .live-badge {
+            background-color: #ff4b4b;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 75, 75, 0.4);
+        }
+
+        .stream-title {
+            color: #a0aec0;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Glassmorphism Container for the Stream */
+        .main-content {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            color: #fff;
-            font-family: Arial, sans-serif;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .stream-container {
-            width: 95%;
-            max-width: 854px;
+
+        .stream-card {
+            width: 100%;
+            max-width: 960px;
             aspect-ratio: 16 / 9;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            background: #111;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .stream-card:hover {
+            border-color: rgba(0, 255, 135, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 255, 135, 0.1);
+        }
+
+        /* Footer info */
+        footer {
+            padding: 20px;
+            color: #4a5568;
+            font-size: 0.8rem;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="stream-container">
-        <iframe title="Willow Cricket Player" marginheight="0" marginwidth="0" src="https://embed.st/embed/admin/admin-willow-cricket/1" scrolling="no" allowfullscreen="yes" allow="encrypted-media; picture-in-picture;" width="100%" height="100%" frameborder="0"></iframe>
-    </div>
+    <!-- Header Content -->
+    <header>
+        <h1 class="logo">CricPulse</h1>
+        <div class="status-container">
+            <span class="live-badge">Live</span>
+            <p class="stream-title">Willow Cricket HD Stream</p>
+        </div>
+    </header>
+
+    <!-- Main Player Card -->
+    <main class="main-content">
+        <div class="stream-card">
+            <iframe title="Willow Cricket Player" marginheight="0" marginwidth="0" src="https://embed.st/embed/admin/admin-willow-cricket/1" scrolling="no" allowfullscreen="yes" allow="encrypted-media; picture-in-picture;" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+    </main>
+
+    <!-- Minimal Clean Footer -->
+    <footer>
+        &copy; 2026 CricPulse. All rights reserved.
+    </footer>
 
 </body>
 </html>
