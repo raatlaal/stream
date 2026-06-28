@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Cup Live - South Africa vs Canada </title>
+    <title>World Cup Live - South Africa vs Canada</title>
     <style>
         /* Modern, premium dark theme */
         body {
@@ -113,13 +113,26 @@
     <!-- Main Player Card -->
     <main class="main-content">
         <div class="stream-card">
-            <iframe title="Willow Cricket Player" marginheight="0" marginwidth="0" src="https://embed.st/embed/admin/admin-willow-cricket/1" scrolling="no" allowfullscreen="yes" allow="encrypted-media; picture-in-picture;" width="100%" height="100%" frameborder="0"></iframe>
+            <!-- Fortified Frame: Blocks hidden popup commands, top-navigation hijacks, and new tabs -->
+            <iframe 
+                title="Willow Cricket Player" 
+                marginheight="0" 
+                marginwidth="0" 
+                src="https://embed.st/embed/admin/admin-willow-cricket/1" 
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+                scrolling="no" 
+                allowfullscreen="yes" 
+                allow="encrypted-media; picture-in-picture;" 
+                width="100%" 
+                height="100%" 
+                frameborder="0">
+            </iframe>
         </div>
     </main>
 
     <!-- Minimal Clean Footer -->
     <footer>
-        &copy; 2026 CricPulse. All rights reserved.
+        &copy; 2026 Fifa World Cup Live. All rights reserved.
     </footer>
 
 </body>
